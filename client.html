@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente WebSocket</title>
+</head>
+<body>
+    <h1>WebSocket Cliente</h1>
+    <button id="sendMessageBtn">Send msg</button>
+
+    <script>
+        const socket = new WebSocket('ws://localhost:8080');
+
+        socket.onopen = () => {
+            console.log('Conexión con WebSocket abierta.');
+        };
+
+        socket.onmessage = (event) => {
+            console.log('Mensaje recibido del servidor:', event.data);
+        };
+
+        socket.onclose = () => {
+            console.log('Conexión con WebSocket cerrada.');
+        };
+
+        document.getElementById('sendMessageBtn').addEventListener('click', () => {
+            const message = 'Hi server!';
+            console.log('Message sended:', message);
+            socket.send(message);
+        });
+    </script>
+</body>
+</html>
+
